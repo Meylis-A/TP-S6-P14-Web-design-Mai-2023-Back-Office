@@ -5,13 +5,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>{{$softland->title}}</title>
-    <meta content="{{$softland->apropos}}" name="description">
-    <meta content="{{$softland->title}}" name="title">
-    <meta name="robots" content="index, follow">
-    <meta name="keywords" content="intelligence,artificielle,IA,chatgpt,chat,softland,AI,gpt">
-    <meta name="language" content="fr">
-    <meta name="author" content="meylis1747">
+    <title>Blog</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
     <!-- Favicons -->
     <link href="{{asset('img/favicon.png') }}" rel="icon">
@@ -53,8 +49,8 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a class="active" href="{{ route('blog-post',['url'=>$softland->url]) }}">Blog</a></li>
+                    <li><a href="{{ route('create') }}">Nouveau</a></li>
+                    <li><a class="active" href="{{ route('blog-post') }}">Blog</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -108,7 +104,20 @@
                                 <span class="post-meta">{{ $article->created_at }} &bullet; By <a href="#">Admin</a></span>
                                 <h3>{{ $article->titre }}</h3>
                                 <p>{{ $article->resume }}</p>
-                                <p><a href="{{ route('show', ['article'=>$article->id,'url'=> $article->url]) }}" class="readmore">Voir plus</a></p>
+                                <nav id="navbar" class="navbar">
+                                    <ul>
+                                        <li> <a href="{{ route('show', ['article'=>$article->id,'url'=> $article->url]) }}" class="readmore">Voir plus</a></li>
+                                        <li> <a href="{{ route('edit', $article->id) }}" class="readmore">Modifier</a></li>
+                                        <li>
+                                            <form action="{{ route('delete', $article->id) }}" method="POST" style="display: inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-link">Supprimer</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                    <i class="bi bi-list mobile-nav-toggle"></i>
+                                </nav>
                             </div>
                         </div>
                     </div>

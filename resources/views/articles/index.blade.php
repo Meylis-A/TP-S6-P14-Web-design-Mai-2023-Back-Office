@@ -5,13 +5,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>{{$softland->title}}</title>
-    <meta content="{{$softland->apropos}}" name="description">
-    <meta content="{{$softland->title}}" name="title">
-    <meta name="robots" content="index, follow">
-    <meta name="keywords" content="intelligence,artificielle,IA,chatgpt,chat,softland,AI,gpt">
-    <meta name="language" content="fr">
-    <meta name="author" content="meylis1747">
+    <title>SoftLand Bootstrap Template - Index</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
     <!-- Favicons -->
     <link href="{{asset('img/favicon.png') }}" rel="icon">
@@ -50,15 +46,6 @@
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
             </div>
-
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a class="active" href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('blog-post',['url'=>$softland->url]) }}">Blog</a></li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
-
         </div>
     </header><!-- End Header -->
 
@@ -78,22 +65,44 @@
         </div>
 
         <div class="container">
-            @section('content')
             <div class="row align-items-center">
                 <div class="col-12 hero-text-image">
                     <div class="row">
                         <div class="col-lg-8 text-center text-lg-start">
-                            
-                            <h1 data-aos="fade-right">{{$softland->title}}</h1>
+                            <h1 data-aos="fade-right">Accroitre votre connaissance avec SoftLand</h1>
                             <p class="mb-5" data-aos="fade-right" data-aos-delay="100">
-                                {{$softland->apropos}}
+                                Le portail de l'intelligence artificielle et des startups IA.
+                                Première source d'information francophone consacrée à l'intelligence artificielle.
                             </p>
-                            <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="{{ route('blog-post',['url'=>$softland->url]) }}" class="btn btn-outline-white">Blog</a></p>
-                            
+                            <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="{{ route('blog-post') }}" class="btn btn-outline-white">Blog</a></p>
                         </div>
-                        <div class="col-lg-4 iphone-wrap">
-                            <img src="https://www.actuia.com/wp-content/uploads/2022/10/visuel-site-internet-magazine-N9-1-e1665459430139.png" alt="Abonnez-vous au magazine de l’intelligence artificielle. À partir de 20€/an." class="phone-1" data-aos="fade-right">
-                            <img src="https://www.actuia.com/wp-content/uploads/2022/10/visuel-site-internet-magazine-N9-1-e1665459430139.png" alt="Abonnez-vous au magazine de l’intelligence artificielle. À partir de 20€/an." class="phone-2" data-aos="fade-right" data-aos-delay="200">
+                        <div class="col-lg-4">
+                            <form action="{{ route('auth') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('POST')
+                                <div class="row justify-content-center text-light">
+                                    <h2 class="text-center">Connection</h2>
+                                    <div class="col-md-8 form-group mt-3">
+                                        <label for="nom_utilisateur">Email</label>
+                                        <input type="mail" class="form-control" name="nom_utilisateur" id="nom_utilisateur" required>
+                                    </div>
+                                    <div class="col-md-8 form-group mt-3">
+                                        <label for="mot_de_passe">Mot de passe</label>
+                                        <input type="password" class="form-control" name="mot_de_passe" id="mot_de_passe" required>
+                                    </div>
+<!-- 
+                                    <div class="col-md-10 mb-3 mt-3">
+                                        <div class="loading">Loading</div>
+                                        <div class="error-message"></div>
+                                        <div class="sent-message">Your message has been sent. Thank you!</div>
+                                    </div> -->
+
+                                    <div class="col-md-6 form-group mt-3">
+                                        <input type="submit" class="btn btn-primary d-block w-100 btn-sm mt-1" value="Send Message">
+                                    </div>
+                                </div>
+
+                            </form>
                         </div>
                     </div>
                 </div>

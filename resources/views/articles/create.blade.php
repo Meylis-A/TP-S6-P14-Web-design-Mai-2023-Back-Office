@@ -5,26 +5,26 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Blog Single - SoftLand Bootstrap Template</title>
+    <title>Nouveau article</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{asset('img/favicon.png')}}" rel="icon">
-    <link href="{{asset('img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+    <link href="{{asset('img/favicon.png') }}" rel="icon">
+    <link href="{{asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="{{asset('vendor/aos/aos.css')}}" rel="stylesheet">
-    <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-    <link href="{{asset('vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
-    <link href="{{asset('vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{asset('vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{asset('vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{asset('vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('css/style.css') }}" rel="stylesheet">
 
     <!-- =======================================================
   * Template Name: SoftLand
@@ -49,7 +49,7 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="active" href="{{ route('blog-post') }}">Blog</a></li>
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -59,7 +59,6 @@
 
     <main id="main">
 
-        <!-- ======= Single Blog Section ======= -->
         <section class="hero-section inner-page">
             <div class="wave">
 
@@ -77,9 +76,9 @@
                 <div class="row align-items-center">
                     <div class="col-12">
                         <div class="row justify-content-center">
-                            <div class="col-md-10 text-center hero-text">
-                                <h1 data-aos="fade-up" data-aos-delay="">{{$article->titre}}</h1>
-                                <p class="mb-5" data-aos="fade-up" data-aos-delay="100">{{$article->created_at}} &bullet; By Admin</p>
+                            <div class="col-md-7 text-center hero-text">
+                                <h1 data-aos="fade-up" data-aos-delay="">Nouveau Article</h1>
+                                <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Actualité de l'intelligence artificielle.</p>
                             </div>
                         </div>
                     </div>
@@ -88,30 +87,64 @@
 
         </section>
 
-        <section class="site-section mb-4">
+        <section class="section">
             <div class="container">
-                <div class="row">
-                    <div class="offset-2 col-md-8 blog-content">
+                <div class="row mb-5 justify-content-center text-center">
+                    <div class="col-md-6" data-aos="fade-up">
 
-                        <p class="lead mb-5">{{$article->resume}}</p>
-                        <div>
-                            <?= $contenu ?>
-                        </div>
+                        <h2>Formulaire Article</h2>
+                        <p class="mb-0">Remplissez tous les champs et mettez les contenu essentielle dans le champs tout en bas.</p>
+                    </div>
 
+                </div>
 
+                <div class="row justify-content-center">
+                    <div class="col-md-8 mb-5 mb-md-0" data-aos="fade-up">
+                        <form action="{{ route('articles.store') }}" method="post" role="form" enctype="multipart/form-data">
+                            @csrf
+                            @method('POST')
+                            <div class="row">
+                                <div class="col-md-12 form-group mt-3">
+                                    <label for="name">Titre</label>
+                                    <input type="text" name="titre" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-12 form-group mt-3 mt-md-0">
+                                    <label for="resume">Resume</label>
+                                    <textarea class="form-control" name="resume" id="resume" required></textarea>
+                                </div>
+                                <div class="col-md-12  mt-3">
+                                    <label for="image">Image Couverture</label>
+                                    <input type="file" class="form-control" name="image" id="image" required>
+                                </div>
+                                <div class="col-md-12 form-group mt-3">
+                                    <label for="contains">Contenu</label>
+                                    <textarea name="contenu" id="contains" cols="30" rows="20" class="form-control"></textarea>
+                                    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+                                    <script>
+                                        CKEDITOR.replace('contains');
+                                    </script>
+                                </div>
+
+                                <div class="col-md-6 form-group mt-4">
+                                    <input type="submit" class="btn btn-primary d-block w-100" value="Enregistrer/Publier">
+                                </div>
+                            </div>
+
+                        </form>
                     </div>
 
                 </div>
             </div>
         </section>
 
+
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
     <footer class="footer" role="contentinfo">
         <div class="container">
-            <div class="row justify-content-center">               
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col ms-auto">
                     <div class="row site-section pt-0">
                         <div class="col-md-4 mb-4 mb-md-0">
                             <h3>Navigation</h3>
@@ -163,14 +196,19 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="{{asset('vendor/aos/aos.js')}}"></script>
-    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('vendor/swiper/swiper-bundle.min.js')}}"></script>
-    <script src="{{asset('vendor/php-email-form/validate.js')}}"></script>
+    <script src="{{asset('vendor/aos/aos.js') }}"></script>
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.js') }}"></script>
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
+    <script src="{{asset('vendor/php-email-form/validate.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+
 
     <!-- Template Main JS File -->
-    <script src="{{asset('js/main.js')}}"></script>
-
+    <script src="{{asset('js/main.js') }}"></script>
+    <!-- <script src="{{asset('js/myScript.js') }}"></script> -->
 </body>
 
 </html>

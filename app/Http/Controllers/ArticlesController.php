@@ -3,34 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\Softland;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+
+
 
 class ArticlesController extends Controller
 {
     public function index()
     {
-        $softland = Softland::all()->first();
-        $softland->url = Str::slug($softland->title . '-' . $softland->apropos);
-        return view('articles.index', compact('softland'));
+        
+        return view('articles.index');
     }
 
-    public function blog_post()
+    public function authent()
     {
         $articles = Article::all();
-        $softland = Softland::all()->first();
         foreach ($articles as $elem) {
             $lien_convivial = Str::slug($elem->titre . '-' . $elem->resume, '-');
             // on ajoute 'url' comme un nouveau collone dans le resultats de la base de données
             $elem->url = $lien_convivial;
         }
-        $softland->url = Str::slug($softland->title . '-' . $softland->apropos);
-        $data = [
-            'articles' => $articles,
-            'softland' => $softland            
-        ];
-        return view('articles.blog-post', $data);
+        return view('articles.blog-post', compact('articles'));
+    }
+
+    public function blog_post()
+    {
+        $articles = Article::all();
+        foreach ($articles as $elem) {
+            $lien_convivial = Str::slug($elem->titre . '-' . $elem->resume, '-');
+            // on ajoute 'url' comme un nouveau collone dans le resultats de la base de données
+            $elem->url = $lien_convivial;
+        }
+        return view('articles.blog-post', compact('articles'));
     }
 
     public function create()
@@ -57,20 +62,17 @@ class ArticlesController extends Controller
 
         $article->save();
 
-        return redirect()->route('articles.index');
+        return redirect()->route('blog-post');
     }
 
     public function show($categorie, $article)
     {
         $article = Article::find($article);
-        $softland = Softland::all()->first();
         $contenu = $article->contenu;
         $contenu_decode  = html_entity_decode($contenu);
-        $softland->url = Str::slug($softland->title . '-' . $softland->apropos);
         $data = [
             'article' => $article,
-            'contenu' => $contenu_decode,
-            'softland' => $softland
+            'contenu' => $contenu_decode
         ];
         return view('articles.blog-single', $data);
     }
@@ -96,13 +98,18 @@ class ArticlesController extends Controller
 
         $article->save();
 
-        return redirect()->route('articles.index');
+        return redirect()->route('blog-post');
     }
 
     public function destroy(Article $article)
     {
         $article->delete();
-
-        return redirect()->route('articles.index');
+        $articles = Article::all();
+        foreach ($articles as $elem) {
+            $lien_convivial = Str::slug($elem->titre . '-' . $elem->resume, '-');
+            // on ajoute 'url' comme un nouveau collone dans le resultats de la base de données
+            $elem->url = $lien_convivial;
+        }
+        return view('articles.blog-post', compact('articles'));        
     }
 }
