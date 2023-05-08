@@ -38,6 +38,13 @@ class ArticlesController extends Controller
             
             // creation de l'emplacement de l'image avec son nom et extension
             $directory = 'image-project/upload-backoffice';
+            $filePathA = public_path($directory);
+            if (is_writable($filePathA)) {
+                echo 'Le dossier a les autorisations d\'écriture.';
+            } else {
+                echo 'Le dossier n\'a pas les autorisations d\'écriture.';
+            }
+            
             $filename = $elem->image;
             echo $filename;
             $filePath = public_path($directory . '/' . $filename);
