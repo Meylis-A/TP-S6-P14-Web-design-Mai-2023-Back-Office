@@ -55,7 +55,7 @@ class ArticlesController extends Controller
             $image = $request->file('image');
             $imageName = time() . '-' . $image->getClientOriginalName();
             $article->image = $imageName;
-            $image->move('/image-project/updload-backoffice', $imageName);
+           // $image->move('/image-project/updload-backoffice', $imageName);
         } else {
             echo 'tay';
         }
