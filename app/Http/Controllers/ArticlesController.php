@@ -20,6 +20,7 @@ class ArticlesController extends Controller
     {
         $articles = Article::all();
         foreach ($articles as $elem) {
+
             $lien_convivial = Str::slug($elem->titre . '-' . $elem->resume, '-');            
             
             $parts = explode('.', $filename);
