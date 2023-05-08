@@ -32,6 +32,8 @@ class ArticlesController extends Controller
         $articles = Article::all();
         foreach ($articles as $elem) {
             $lien_convivial = Str::slug($elem->titre . '-' . $elem->resume, '-');
+            // decodage de l'image encoder en base64
+            $elem->image = base64_decode($elem->image);
             // on ajoute 'url' comme un nouveau collone dans le resultats de la base de données
             $elem->url = $lien_convivial;
         }
