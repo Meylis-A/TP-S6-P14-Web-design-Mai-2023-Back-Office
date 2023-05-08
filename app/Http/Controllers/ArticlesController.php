@@ -116,9 +116,11 @@ class ArticlesController extends Controller
         $article->resume = $request->resume;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
+            $imageData = file_get_contents($image->getRealPath());
+            $base64 = base64_encode($imageData);
             $imageName = time() . '-' . $image->getClientOriginalName();
+            $article->imageencode =  $base64;
             $article->image = $imageName;
-            $image->move(public_path('image-project/updload-backoffice'), $imageName);
         } else {
         }
 
@@ -130,13 +132,7 @@ class ArticlesController extends Controller
 
     public function destroy(Article $article)
     {
-        $article->delete();
-        $articles = Article::all();
-        foreach ($articles as $elem) {
-            $lien_convivial = Str::slug($elem->titre . '-' . $elem->resume, '-');
-            // on ajoute 'url' comme un nouveau collone dans le resultats de la base de données
-            $elem->url = $lien_convivial;
-        }
-        return view('articles.blog-post', compact('articles'));        
+        $article->delete();        
+        return redirect()->route('blog-post');    
     }
 }
