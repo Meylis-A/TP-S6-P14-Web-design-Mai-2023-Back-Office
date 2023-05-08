@@ -20,33 +20,15 @@ class ArticlesController extends Controller
     {
         $articles = Article::all();
         foreach ($articles as $elem) {
-            $lien_convivial = Str::slug($elem->titre . '-' . $elem->resume, '-');
-            
-            // decodage de l'image encoder en base64           
-//             $imageData = base64_decode($elem->imageencode);
-
-//             $filename = $elem->image;
+            $lien_convivial = Str::slug($elem->titre . '-' . $elem->resume, '-');            
             
             $parts = explode('.', $filename);
             
+            // obtention du format de l'image
             $format = end($parts);
             
-            $elem->format = $format;
-            
-            // Chemin complet vers le répertoire de destination
-//             $destinationPath = public_path('image-project/upload-backoffice');
-
-            // Vérification si le répertoire de destination existe, sinon le créer
-//             if (!file_exists($destinationPath)) {
-//                 mkdir($destinationPath, 0755, true);
-//             }
-
-
-            // Chemin complet vers le fichier de destination
-//             $filePath = $destinationPath . '/' . $filename;
-
-            // Enregistrement de l'image dans le fichier de destination
-//             file_put_contents($filePath, $imageData);                                 
+            // definition du format de l'image
+            $elem->format = $format;                                    
 
             // on ajoute 'url' comme un nouveau collone dans le resultats de la base de données
             $elem->url = $lien_convivial;
@@ -59,28 +41,15 @@ class ArticlesController extends Controller
     {
         $articles = Article::all();
         foreach ($articles as $elem) {
-            $lien_convivial = Str::slug($elem->titre . '-' . $elem->resume, '-');
+            $lien_convivial = Str::slug($elem->titre . '-' . $elem->resume, '-');            
             
-            // decodage de l'image encoder en base64           
-            $imageData = base64_decode($elem->imageencode);
-
-            $filename = $elem->image;
+            $parts = explode('.', $filename);
             
-
-            // Chemin complet vers le répertoire de destination
-            $destinationPath = public_path('image-project/upload-backoffice');
-
-            // Vérification si le répertoire de destination existe, sinon le créer
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0755, true);
-            }
-
-
-            // Chemin complet vers le fichier de destination
-            $filePath = $destinationPath . '/' . $filename;
-
-            // Enregistrement de l'image dans le fichier de destination
-            file_put_contents($filePath, $imageData);                                       
+            // obtention du format de l'image
+            $format = end($parts);
+            
+            // definition du format de l'image
+            $elem->format = $format;                                    
 
             // on ajoute 'url' comme un nouveau collone dans le resultats de la base de données
             $elem->url = $lien_convivial;
