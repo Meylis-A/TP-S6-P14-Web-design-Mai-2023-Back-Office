@@ -37,8 +37,10 @@ class ArticlesController extends Controller
             $imageData->image = base64_decode($elem->imageencode);
             
             // creation de l'emplacement de l'image avec son nom et extension
-            $filePath = public_path('image-project/upload-backoffice/' . $elem->image);
-            
+            $directory = 'image-project/upload-backoffice';
+            $filename = $elem->image;
+            echo $filename;
+            $filePath = public_path($directory . '/' . $filename);
             // creation de l'image et l'emplacer dans le path public
             file_put_contents($filePath, $imageData);
             
