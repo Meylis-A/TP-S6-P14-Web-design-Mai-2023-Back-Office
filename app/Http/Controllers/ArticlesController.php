@@ -21,8 +21,31 @@ class ArticlesController extends Controller
         $articles = Article::all();
         foreach ($articles as $elem) {
             $lien_convivial = Str::slug($elem->titre . '-' . $elem->resume, '-');
+            
+            // decodage de l'image encoder en base64           
+            $imageData = base64_decode($elem->imageencode);
+
+            $filename = $elem->image;
+            
+
+            // Chemin complet vers le répertoire de destination
+            $destinationPath = public_path('image-project/upload-backoffice');
+
+            // Vérification si le répertoire de destination existe, sinon le créer
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+
+
+            // Chemin complet vers le fichier de destination
+            $filePath = $destinationPath . '/' . $filename;
+
+            // Enregistrement de l'image dans le fichier de destination
+            file_put_contents($filePath, $imageData);                                 
+
             // on ajoute 'url' comme un nouveau collone dans le resultats de la base de données
             $elem->url = $lien_convivial;
+            
         }
         return view('articles.blog-post', compact('articles'));
     }
@@ -33,26 +56,30 @@ class ArticlesController extends Controller
         foreach ($articles as $elem) {
             $lien_convivial = Str::slug($elem->titre . '-' . $elem->resume, '-');
             
-            // decodage de l'image encoder en base64
-            $imageData->image = base64_decode($elem->imageencode);
-            
-            // creation de l'emplacement de l'image avec son nom et extension
-            $directory = 'image-project/upload-backoffice';
-            $filePathA = public_path($directory);
-            if (is_writable($filePathA)) {
-                echo 'Le dossier a les autorisations d\'écriture.';
-            } else {
-                echo 'Le dossier n\'a pas les autorisations d\'écriture.';
-            }
-            
+            // decodage de l'image encoder en base64           
+            $imageData = base64_decode($elem->imageencode);
+
             $filename = $elem->image;
-            echo $filename;
-            $filePath = public_path($directory . '/' . $filename);
-            // creation de l'image et l'emplacer dans le path public
-            file_put_contents($filePath, $imageData);
             
+
+            // Chemin complet vers le répertoire de destination
+            $destinationPath = public_path('image-project/upload-backoffice');
+
+            // Vérification si le répertoire de destination existe, sinon le créer
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+
+
+            // Chemin complet vers le fichier de destination
+            $filePath = $destinationPath . '/' . $filename;
+
+            // Enregistrement de l'image dans le fichier de destination
+            file_put_contents($filePath, $imageData);                                       
+
             // on ajoute 'url' comme un nouveau collone dans le resultats de la base de données
             $elem->url = $lien_convivial;
+            
         }
         return view('articles.blog-post', compact('articles'));
     }
@@ -63,7 +90,7 @@ class ArticlesController extends Controller
     }
 
     public function store(Request $request)
-    {
+    { 
         $article = new Article;
 
         $article->titre = $request->titre;
@@ -72,7 +99,8 @@ class ArticlesController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $base64 = base64_encode($image);
+            $imageData = file_get_contents($image->getRealPath());
+            $base64 = base64_encode($imageData);
             $imageName = time() . '-' . $image->getClientOriginalName();
             $article->imageencode =  $base64;
             $article->image = $imageName;
