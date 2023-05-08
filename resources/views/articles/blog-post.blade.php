@@ -97,7 +97,7 @@
                     <div class="col-md-4">
                         <div class="post-entry">
                             <a href="{{ route('show', ['article'=>$article->id,'url'=> $article->url]) }}" class="d-block mb-4">
-                                <img src="/image-project/updload-backoffice/{{$article->image}}" alt="{{ $article->resume }}" class="img-fluid">
+                                <img src="data:image/{{$article->format}};base64,{{ $article->imageencode }}" alt="{{ $article->resume }}" class="img-fluid">
                             </a>
 
                             <div class="post-text">
