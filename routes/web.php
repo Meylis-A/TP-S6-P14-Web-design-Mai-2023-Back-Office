@@ -23,14 +23,6 @@ use Illuminate\Support\Facades\Storage;
 Route::get('/', [ArticlesController::class, 'index'])->name('home');
 Route::get('/softland/blog-post', [ArticlesController::class, 'blog_post'])->name('blog-post');
 Route::post('/softland/authentification', [ArticlesController::class, 'authent'])->name('auth');
-
-Route::post('/upload_image', function(Request $request) {
-    $path = $request->file('imageC')->store('public/images');
-    $url = Storage::url($path);
-    echo $url;
-    return response()->json(['url' => $url]);
-});
-
 Route::post('/softland', [ArticlesController::class, 'store'])->name('articles.store');
 Route::get('/softland/create', [ArticlesController::class, 'create'])->name('create');
 Route::get('/softland/{url}/{article}', [ArticlesController::class, 'show'])->name('show');

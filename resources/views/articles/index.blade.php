@@ -25,14 +25,6 @@
 
     <!-- Template Main CSS File -->
     <link href="{{asset('css/style.css') }}" rel="stylesheet">
-
-    <!-- =======================================================
-  * Template Name: SoftLand
-  * Updated: Mar 10 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/softland-bootstrap-app-landing-page-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -84,25 +76,23 @@
                                     <h2 class="text-center">Connection</h2>
                                     <div class="col-md-8 form-group mt-3">
                                         <label for="nom_utilisateur">Email</label>
-                                        <input type="mail" class="form-control" name="nom_utilisateur" id="nom_utilisateur" required>
+                                        <input type="text" class="form-control" name="nomutilisateur" id="nom_utilisateur" required>
                                     </div>
                                     <div class="col-md-8 form-group mt-3">
                                         <label for="mot_de_passe">Mot de passe</label>
-                                        <input type="password" class="form-control" name="mot_de_passe" id="mot_de_passe" required>
+                                        <input type="password" class="form-control" name="motdepasse" id="mot_de_passe" required>
                                     </div>
-<!-- 
-                                    <div class="col-md-10 mb-3 mt-3">
-                                        <div class="loading">Loading</div>
-                                        <div class="error-message"></div>
-                                        <div class="sent-message">Your message has been sent. Thank you!</div>
-                                    </div> -->
 
                                     <div class="col-md-6 form-group mt-3">
                                         <input type="submit" class="btn btn-primary d-block w-100 btn-sm mt-1" value="Send Message">
                                     </div>
                                 </div>
-
                             </form>
+                            <div class="mt-4" style="text-align: center;">
+                                <?php if(isset($error)){ ?>
+                                    <p data-aos="fade-up" style="color:red";><?= $error ?></p>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>
