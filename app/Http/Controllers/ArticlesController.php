@@ -64,9 +64,9 @@ class ArticlesController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $base64 = base64_encode($image);
-            //$imageName = time() . '-' . $image->getClientOriginalName();
-            $article->image =  $base64;
-            //$image->store('image-project/updload-backoffice', $imageName);
+            $imageName = time() . '-' . $image->getClientOriginalName();
+            $article->imageencode =  $base64;
+            $article->image = $imageName;
         } else {
             echo 'tay';
         }
