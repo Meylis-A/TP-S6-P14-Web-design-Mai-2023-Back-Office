@@ -17,7 +17,7 @@ class ArticlesController extends Controller
         return view('articles.index');
     }
 
-    public function authent(Reqeust $request)
+    public function authent(Request $request)
     {
 
         $utilisateur = new Login;
