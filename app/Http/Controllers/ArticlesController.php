@@ -25,7 +25,7 @@ class ArticlesController extends Controller
             // decodage de l'image encoder en base64           
 //             $imageData = base64_decode($elem->imageencode);
 
-//             $filename = $elem->image;
+            $filename = $elem->image;
             
             $parts = explode('.', $filename);
             
