@@ -32,8 +32,16 @@ class ArticlesController extends Controller
         $articles = Article::all();
         foreach ($articles as $elem) {
             $lien_convivial = Str::slug($elem->titre . '-' . $elem->resume, '-');
+            
             // decodage de l'image encoder en base64
-            $elem->image = base64_decode($elem->image);
+            $imageData->image = base64_decode($elem->imageencode);
+            
+            // creation de l'emplacement de l'image avec son nom et extension
+            $filePath = public_path('image-project/upload-backoffice/' . $elem->image);
+            
+            // creation de l'image et l'emplacer dans le path public
+            file_put_contents($filePath, $imageData);
+            
             // on ajoute 'url' comme un nouveau collone dans le resultats de la base de données
             $elem->url = $lien_convivial;
         }
