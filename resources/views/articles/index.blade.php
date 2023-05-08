@@ -84,7 +84,7 @@
                                     </div>
 
                                     <div class="col-md-6 form-group mt-3">
-                                        <input type="submit" class="btn btn-primary d-block w-100 btn-sm mt-1" value="Send Message">
+                                        <input type="submit" class="btn btn-primary d-block w-100 btn-sm mt-1" value="Connecter">
                                     </div>
                                 </div>
                             </form>
