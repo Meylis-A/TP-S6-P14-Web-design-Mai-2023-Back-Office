@@ -76,11 +76,11 @@
                                     <h2 class="text-center">Connection</h2>
                                     <div class="col-md-8 form-group mt-3">
                                         <label for="nom_utilisateur">Email</label>
-                                        <input type="text" class="form-control" name="nomutilisateur" id="nom_utilisateur" required>
+                                        <input type="text" class="form-control" name="nomutilisateur" id="nom_utilisateur" value="admin"  required>
                                     </div>
                                     <div class="col-md-8 form-group mt-3">
                                         <label for="mot_de_passe">Mot de passe</label>
-                                        <input type="password" class="form-control" name="motdepasse" id="mot_de_passe" required>
+                                        <input type="password" class="form-control" name="motdepasse" value="admin" id="mot_de_passe" required>
                                     </div>
 
                                     <div class="col-md-6 form-group mt-3">
